@@ -2,17 +2,22 @@ package org.jetbrains.kotlinworkshop.student.introduction._2Shop
 
 // Return the set of customers who ordered the specified product
 fun Shop.getCustomersWhoOrderedProduct(product: Product): Set<Customer> {
-    TODO()
+    return this.customers.filter {
+        it.orders.flatMap { it.products }.contains(product)
+    }.toSet()
 }
 
 // Return the most expensive product among all delivered products
 // (use the Order.isDelivered flag)
 fun Customer.getMostExpensiveDeliveredProduct(): Product? {
-    TODO()
+    return this.orders.filter { it.isDelivered }
+            .flatMap { it.products }
+            .maxBy { it.price }
 }
 
 // Return the number of times the given product was ordered.
 // Note: a customer may order the same product for several times.
 fun Shop.getNumberOfTimesProductWasOrdered(product: Product): Int {
-    TODO()
+    return this.customers.flatMap { it.orders }
+            .sumBy { it.products.count { it == product } }
 }

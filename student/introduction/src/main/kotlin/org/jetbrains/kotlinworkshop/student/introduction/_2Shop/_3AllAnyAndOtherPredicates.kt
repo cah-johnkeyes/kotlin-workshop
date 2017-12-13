@@ -19,26 +19,16 @@ fun main(args: Array<String>) {
 }
 
 // Return true if the customer is from the given city
-fun Customer.isFrom(city: City): Boolean {
-    TODO()
-}
+fun Customer.isFrom(city: City) = this.city == city
 
 // Return true if all customers are from the given city
-fun Shop.checkAllCustomersAreFrom(city: City): Boolean {
-    TODO()
-}
+fun Shop.checkAllCustomersAreFrom(city: City) = this.customers.all { it.isFrom(city) }
 
 // Return true if there is at least one customer from the given city
-fun Shop.hasCustomerFrom(city: City): Boolean {
-    TODO()
-}
+fun Shop.hasCustomerFrom(city: City) = this.customers.any { it.isFrom(city) }
 
 // Return the number of customers from the given city
-fun Shop.countCustomersFrom(city: City): Int {
-    TODO()
-}
+fun Shop.countCustomersFrom(city: City) = this.customers.count { it.isFrom(city) }
 
 // Return a customer who lives in the given city, or null if there is none
-fun Shop.findAnyCustomerFrom(city: City): Customer? {
-    TODO()
-}
+fun Shop.findAnyCustomerFrom(city: City) = this.customers.find { it.isFrom(city) }
