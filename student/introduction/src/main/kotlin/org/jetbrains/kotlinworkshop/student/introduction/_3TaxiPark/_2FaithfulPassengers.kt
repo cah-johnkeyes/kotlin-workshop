@@ -1,5 +1,9 @@
 package org.jetbrains.kotlinworkshop.student.introduction._3TaxiPark
 
 // Find all passengers having more than 'minTrips' number of trips
-fun TaxiPark.findFaithfulPassengers(minTrips: Int): List<Passenger> =
-        TODO()
+fun TaxiPark.findFaithfulPassengers(minTrips: Int): List<Passenger> = orders
+        .flatMap { it.passengers }
+        .groupingBy { it }
+        .eachCount()
+        .filter { it.value > minTrips }
+        .keys.toList()
